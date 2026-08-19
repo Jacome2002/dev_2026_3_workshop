@@ -15,6 +15,8 @@ class Data:
             list: Lista con los elementos en orden inverso
         """
         pass
+        return lista[::-1]
+
     
     def buscar_elemento(self, lista, elemento):
         """
@@ -29,6 +31,10 @@ class Data:
             int: Índice del elemento o -1 si no se encuentra
         """
         pass
+        for i in range(len(lista)):
+            if lista[i] == elemento:
+                return i
+        return -1
     
     def eliminar_duplicados(self, lista):
         """
@@ -42,7 +48,12 @@ class Data:
             list: Lista sin elementos duplicados
         """
         pass
-    
+        nueva_lista = []
+        for elemento in lista:
+            if self.buscar_elemento(nueva_lista, elemento) == -1:
+                nueva_lista.append(elemento)
+        return nueva_lista
+
     def merge_ordenado(self, lista1, lista2):
         """
         Combina dos listas ordenadas en una sola lista ordenada.
@@ -55,6 +66,18 @@ class Data:
             list: Lista combinada y ordenada
         """
         pass
+        resultado = []
+        i = j = 0
+        while i < len(lista1) and j < len(lista2):
+            if lista1[i] < lista2[j]:
+                resultado.append(lista1[i])
+                i += 1
+            else:
+                resultado.append(lista2[j])
+                j += 1
+        resultado.extend(lista1[i:])
+        resultado.extend(lista2[j:])
+        return resultado
     
     def rotar_lista(self, lista, k):
         """
@@ -68,7 +91,9 @@ class Data:
             list: Lista rotada
         """
         pass
-    
+        k = k % len(lista) if lista else 0
+        return lista[-k:] + lista[:-k]
+
     def encuentra_numero_faltante(self, lista):
         """
         Encuentra el número faltante en una lista de enteros del 1 al n.
@@ -80,6 +105,10 @@ class Data:
             int: El número que falta en la secuencia
         """
         pass
+        n = len(lista) + 1
+        suma_esperada = n * (n + 1) // 2
+        suma_actual = sum(lista)
+        return suma_esperada - suma_actual
     
     def es_subconjunto(self, conjunto1, conjunto2):
         """
@@ -93,6 +122,10 @@ class Data:
             bool: True si conjunto1 es subconjunto de conjunto2, False en caso contrario
         """
         pass
+        for elemento in conjunto1:
+            if self.buscar_elemento(conjunto2, elemento) == -1:
+                return False
+        return True
     
     def implementar_pila(self):
         """
@@ -102,6 +135,30 @@ class Data:
             dict: Diccionario con métodos push, pop, peek y is_empty
         """
         pass
+        pila = []
+        
+        def push(elemento):
+            pila.append(elemento)
+        
+        def pop():
+            if not is_empty():
+                return pila.pop()
+            return None
+        
+        def peek():
+            if not is_empty():
+                return pila[-1]
+            return None
+        
+        def is_empty():
+            return len(pila) == 0
+        
+        return {
+            "push": push,
+            "pop": pop,
+            "peek": peek,
+            "is_empty": is_empty
+        }
     
     def implementar_cola(self):
         """
@@ -111,6 +168,30 @@ class Data:
             dict: Diccionario con métodos enqueue, dequeue, peek y is_empty
         """
         pass
+        cola = []
+        
+        def enqueue(elemento):
+            cola.append(elemento)
+        
+        def dequeue():
+            if not is_empty():
+                return cola.pop(0)
+            return None
+        
+        def peek():
+            if not is_empty():
+                return cola[0]
+            return None
+        
+        def is_empty():
+            return len(cola) == 0
+        
+        return {
+            "enqueue": enqueue,
+            "dequeue": dequeue,
+            "peek": peek,
+            "is_empty": is_empty
+        }
     
     def matriz_transpuesta(self, matriz):
         """
@@ -123,3 +204,4 @@ class Data:
             list: Matriz transpuesta
         """
         pass
+        return [[matriz[i][j] for i in range(len(matriz))] for j in range(len(matriz[0]))]
