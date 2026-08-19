@@ -15,7 +15,7 @@ class Geometria:
         Returns:
             float: Área del rectángulo
         """
-        return base*altura
+        return base * altura if base >= 0 and altura >= 0 else 0
     
     def perimetro_rectangulo(self, base, altura):
         """
@@ -41,7 +41,7 @@ class Geometria:
             float: Área del círculo
         """
         import math
-        return math.pi * radio ** 2
+        return math.pi * radio ** 2 if radio >= 0 else 0
     
     def perimetro_circulo(self, radio):
         """
@@ -99,7 +99,7 @@ class Geometria:
             bool: True si los lados pueden formar un triángulo, False en caso contrario
         """
         pass
-        return (lado1 + lado2 > lado3) and (lado1 + lado3 > lado2) and (lado2 + lado3 > lado1)
+        return min(lado1, lado2, lado3) > 0 and (lado1 + lado2 > lado3) and (lado1 + lado3 > lado2) and (lado2 + lado3 > lado1)
     
     def area_trapecio(self, base_mayor, base_menor, altura):
         """
@@ -192,7 +192,7 @@ class Geometria:
             float: Volumen del cubo
         """
         pass
-        return lado ** 3
+        return lado ** 3 if lado >= 0 else 0
     def area_superficie_cubo(self, lado):
         """
         Calcula el área de la superficie de un cubo.
@@ -255,7 +255,7 @@ class Geometria:
             float: Área de la superficie del cilindro
         """
         pass
-        return 2 * 3.14159 * radio * altura
+        return 2 * 3.14159 * radio * altura + 2 * 3.14159 * radio ** 2
     def distancia_entre_puntos(self, x1, y1, x2, y2):
         """
         Calcula la distancia euclidiana entre dos puntos en un plano 2D.
@@ -301,8 +301,6 @@ class Geometria:
             float: Pendiente de la recta
         """
         pass
-        if x2 - x1 == 0:
-            raise ValueError("La pendiente es indefinida (división por cero)")
         return (y2 - y1) / (x2 - x1)
 
     def ecuacion_recta(self, x1, y1, x2, y2):
@@ -322,6 +320,8 @@ class Geometria:
         A = y2 - y1
         B = x1 - x2
         C = x2 * y1 - x1 * y2
+        if A == 0 and B != 0:
+            return 0, 1, C / B
         return A, B, C
 
     def area_poligono_regular(self, num_lados, lado, apotema):

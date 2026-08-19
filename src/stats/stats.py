@@ -13,7 +13,7 @@ class Stats:
             promedio([1, 2, 3, 4, 5]) -> 3.0
         """
         if not numeros:
-            raise ValueError("La lista de números no puede estar vacía")
+            return 0
         return sum(numeros) / len(numeros)
     
     def mediana(self, numeros):
@@ -32,7 +32,7 @@ class Stats:
             mediana([1, 2, 3, 4]) -> 2.5
         """
         if not numeros:
-            raise ValueError("La lista de números no puede estar vacía")
+            return 0
         numeros_ordenados = sorted(numeros)
         n = len(numeros_ordenados)
         mitad = n // 2
@@ -56,7 +56,7 @@ class Stats:
             moda([1, 2, 2, 3, 3, 3]) -> 3
         """
         if not numeros:
-            raise ValueError("La lista de números no puede estar vacía")
+            return None
         frecuencias = {}
         for num in numeros:
             frecuencias[num] = frecuencias.get(num, 0) + 1
@@ -80,7 +80,7 @@ class Stats:
             desviacion_estandar([1, 2, 3, 4, 5]) -> 1.41...
         """
         if not numeros:
-            raise ValueError("La lista de números no puede estar vacía")
+            return 0
         prom = self.promedio(numeros)
         cuadrados = [(x - prom) ** 2 for x in numeros]
         varianza = sum(cuadrados) / len(numeros)
@@ -101,7 +101,7 @@ class Stats:
             varianza([1, 2, 3, 4, 5]) -> 2.0
         """
         if not numeros:
-            raise ValueError("La lista de números no puede estar vacía")
+            return 0
         prom = self.promedio(numeros)
         cuadrados = [(x - prom) ** 2 for x in numeros]
         return sum(cuadrados) / len(numeros)
@@ -120,5 +120,5 @@ class Stats:
             rango([1, 5, 3, 9, 2]) -> 8
         """
         if not numeros:
-            raise ValueError("La lista de números no puede estar vacía")
+            return 0
         return max(numeros) - min(numeros)

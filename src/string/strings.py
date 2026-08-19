@@ -59,7 +59,7 @@ class Strings:
         Returns:
             int: Número de consonantes en la cadena
         """
-        consonantes = "bcdfghjklmnpqrstvwxyz"
+        consonantes = "bcdfghjklmnpqrstvwxz"
         contador = 0
         for char in texto.lower():
             if char in consonantes:
@@ -103,10 +103,18 @@ class Strings:
         Returns:
             str: Cadena con la primera letra de cada palabra en mayúscula
         """
-        palabras = texto.split()
-        for i in range(len(palabras)):
-            palabras[i] = palabras[i].capitalize()
-        return " ".join(palabras)
+        resultado = ""
+        inicio_palabra = True
+        for caracter in texto:
+            if caracter.isspace():
+                resultado += caracter
+                inicio_palabra = True
+            elif inicio_palabra:
+                resultado += caracter.upper()
+                inicio_palabra = False
+            else:
+                resultado += caracter.lower()
+        return resultado
 
     def eliminar_espacios_duplicados(self, texto):
         """
@@ -118,7 +126,22 @@ class Strings:
         Returns:
             str: Cadena sin espacios duplicados
         """
-        return texto.strip()
+        resultado = []
+        espacio_pendiente = False
+        for caracter in texto:
+            if caracter.isspace():
+                espacio_pendiente = True
+            else:
+                if espacio_pendiente and resultado:
+                    resultado.append(" ")
+                resultado.append(caracter)
+                espacio_pendiente = False
+        if espacio_pendiente and resultado:
+            resultado.append(" ")
+        if not resultado:
+            return ""
+        prefijo = " " if texto[0].isspace() else ""
+        return prefijo + "".join(resultado)
 
     def es_numero_entero(self, texto):
         """
@@ -191,6 +214,8 @@ class Strings:
         Returns:
             list: Lista con las posiciones iniciales de cada ocurrencia
         """
+        if not subcadena:
+            return []
         posiciones = []
         for i in range(len(texto) - len(subcadena) + 1):
             if texto[i:i + len(subcadena)] == subcadena:

@@ -24,7 +24,7 @@ class Matrix:
         if not A or not B or len(A) != len(B) or len(A[0]) != len(B[0]):
             raise ValueError("Las matrices tienen dimensiones incompatibles")
 
-        return [[A[i][j] - B[i][j] for j in range(len(A[0]))] for i in range(len(A))]
+        return [[A[i][j] + B[i][j] for j in range(len(A[0]))] for i in range(len(A))]
 
     def resta_matrices(self, A, B):
         """
@@ -108,6 +108,8 @@ class Matrix:
         Ejemplo:
             transpuesta([[1, 2, 3], [4, 5, 6]]) -> [[1, 4], [2, 5], [3, 6]]
         """
+        if not matriz:
+            return []
         return [[matriz[i][j] for i in range(len(matriz))] for j in range(len(matriz[0]))]
 
     def es_cuadrada(self, matriz):
@@ -125,6 +127,12 @@ class Matrix:
             es_cuadrada([[1, 2, 3], [4, 5, 6]]) -> False
         """
         return bool(matriz) and len(matriz) == len(matriz[0])
+
+    def es_2x2(self, matriz):
+        return len(matriz) == 2 and all(len(fila) == 2 for fila in matriz)
+
+    def es_3x3(self, matriz):
+        return len(matriz) == 3 and all(len(fila) == 3 for fila in matriz)
 
     def es_simetrica(self, matriz):
         """
@@ -295,8 +303,11 @@ class Matrix:
             rotar_90([[1, 2], [3, 4]]) -> [[3, 1], [4, 2]]
             rotar_90([[1, 2, 3], [4, 5, 6], [7, 8, 9]]) -> [[7, 4, 1], [8, 5, 2], [9, 6, 3]]
         """
-        n = len(matriz)
-        return [[matriz[n-1-j][i] for j in range(n)] for i in range(n)]
+        if not matriz:
+            return []
+        filas = len(matriz)
+        columnas = len(matriz[0])
+        return [[matriz[filas - 1 - fila][columna] for fila in range(filas)] for columna in range(columnas)]
 
     def buscar_en_matriz(self, matriz, valor):
         """

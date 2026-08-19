@@ -50,7 +50,7 @@ class Data:
         pass
         nueva_lista = []
         for elemento in lista:
-            if self.buscar_elemento(nueva_lista, elemento) == -1:
+            if not any(type(elemento) is type(actual) and elemento == actual for actual in nueva_lista):
                 nueva_lista.append(elemento)
         return nueva_lista
 
@@ -203,5 +203,6 @@ class Data:
         Returns:
             list: Matriz transpuesta
         """
-        pass
+        if not matriz:
+            return []
         return [[matriz[i][j] for i in range(len(matriz))] for j in range(len(matriz[0]))]

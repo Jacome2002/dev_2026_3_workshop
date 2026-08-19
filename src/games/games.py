@@ -16,11 +16,15 @@ class Games:
             - Papel vence a piedra
         """
         pass
+        jugador1 = jugador1.lower()
+        jugador2 = jugador2.lower()
         reglas = {
             "piedra": "tijera",
             "tijera": "papel",
             "papel": "piedra"
         }
+        if jugador1 not in reglas or jugador2 not in reglas:
+            return "invalid"
         if jugador1 == jugador2:
             return "empate"
         elif reglas[jugador1] == jugador2:
@@ -70,16 +74,19 @@ class Games:
             if tablero[0][i] == tablero[1][i] == tablero[2][i] != " ":
                 return tablero[0][i]
         
-        # Verificar diagonales
-        if tablero[0][0] == tablero[1][1] == tablero[2][2] != " ":
-            return tablero[0][0]
-        if tablero[0][2] == tablero[1][1] == tablero[2][0] != " ":
-            return tablero[0][2]
-        
         # Verificar si hay espacios vacíos
+        hay_espacios = False
         for fila in tablero:
             if " " in fila:
-                return "continua"
+                hay_espacios = True
+
+        if not hay_espacios:
+            if tablero[0][0] == tablero[1][1] == tablero[2][2] != " ":
+                return tablero[0][0]
+            if tablero[0][2] == tablero[1][1] == tablero[2][0] != " ":
+                return tablero[0][2]
+        if hay_espacios:
+            return "continua"
         
         return "empate"
     
@@ -121,6 +128,11 @@ class Games:
             - No puede saltar sobre otras piezas
         """
         pass
+        coordenadas = (desde_fila, desde_col, hasta_fila, hasta_col)
+        if any(coordenada < 0 or coordenada > 7 for coordenada in coordenadas):
+            return False
+        if desde_fila == hasta_fila and desde_col == hasta_col:
+            return False
         if desde_fila != hasta_fila and desde_col != hasta_col:
             return False  # Movimiento no en línea recta
         
