@@ -59,7 +59,7 @@ class Strings:
         Returns:
             int: Número de consonantes en la cadena
         """
-        consonantes = "bcdfghjklmnpqrstvwxz"
+        consonantes = "bcdfghjklmnpqrstvwxyz"
         contador = 0
         for char in texto.lower():
             if char in consonantes:
