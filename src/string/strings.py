@@ -220,4 +220,4 @@ class Strings:
         for i in range(len(texto) - len(subcadena) + 1):
             if texto[i:i + len(subcadena)] == subcadena:
                 posiciones.append(i)
-          return posiciones
+             return posiciones
