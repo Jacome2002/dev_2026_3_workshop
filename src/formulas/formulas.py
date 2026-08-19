@@ -2,7 +2,6 @@ class Formulas:
     """
     Clase con ejercicios de fórmulas de física, finanzas y álgebra.
     """
-
     def velocidad_media(self, distancia, tiempo):
         """
         Calcula la velocidad media de un recorrido.
