@@ -138,6 +138,8 @@ class TestConversion:
         assert self.conversion.texto_a_morse("") == ""
         # Test con minúsculas (deben convertirse igual que mayúsculas)
         assert self.conversion.texto_a_morse("hello") == ".... . .-.. .-.. ---"
+        # Test con palabras separadas por espacios
+        assert self.conversion.texto_a_morse("SOS HELP") == "... --- ... .... . .-.. .--."
     
     def test_morse_a_texto(self):
         # Test con letras básicas
